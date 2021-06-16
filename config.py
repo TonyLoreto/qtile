@@ -83,6 +83,20 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(),
         desc="Spawn a command using a prompt widget"),
+
+    #CUSTOM BINDINGS
+
+    Key([mod], "b", lazy.spawn("brave")),
+
+    Key([mod], "f", lazy.spawn("thunar")),
+
+    Key([mod], "v", lazy.spawn("vlc")),
+
+    Key([mod], "m", lazy.spawn("firefox")),
+
+    Key([mod], "t", lazy.spawn("xfce4-terminal")),
+
+    # Key([mod], "x", lazy.spawn("pkexec xfpm-power-backlight-helper --set-brightness 3906")),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -146,6 +160,8 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+
+
 screens = [
     Screen(
         bottom=bar.Bar(
@@ -153,32 +169,36 @@ screens = [
                 # widget.CurrentLayout(),
                 widget.GroupBox(),
                 widget.Prompt(),
-                widget.WindowName(),
+                widget.WindowName(foreground= color, fontsize=12),
                 widget.Chord(
                     chords_colors={
                         'launch': ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                # widget.TextBox("default config", name="default"),
-                # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                widget.TextBox("Tony", foreground= color),
+                #                   
+                widget.TextBox("Tony", foreground= color, fontsize=16),
+                widget.TextBox(text=" ", foreground= color, fontsize=22),
+                widget.Systray(),
                 # widget.Sep(
                     # linewidth = 8,
                     # padding = 6,
                     # foreground = "ff0000",
                     # background = color,
                 # ),
-                widget.TextBox("Vol:"),
-                widget.Volume(),
-                widget.TextBox("Bat:"),
+                widget.TextBox(text='', background="000000", foreground=color, padding=0, fontsize=42, width=19),
+                widget.TextBox("", background=color, foreground="000000"),
+                widget.Volume( background=color, foreground="000000"),
+                widget.TextBox(text='', background=color, foreground="000000", padding=0, fontsize=42, width=19),
+                widget.TextBox(""),
                 widget.Battery(
                     format= '{percent:2.0%}',
                     full_char= '=',
                 ),
-                widget.Systray(),
-                widget.Clock(format='%y/%m/%d %a %I:%M %p'),
-                widget.QuickExit(),
+                widget.TextBox(text='', background="000000", foreground=color, padding=0, fontsize=42, width=19),
+                widget.Clock(format='%y/%m/%d %H:%M %p', background=color, foreground="000000"),#add %a for weekdays
+                widget.TextBox(text='', background=color, foreground="000000", padding=0, fontsize=42, width=19),
+                widget.QuickExit(default_text=" "),
             ],
             24,
             # background="#222222",
@@ -187,8 +207,6 @@ screens = [
     ),
 ]
 
-def open_dmenu(qtile):
-    qtile.cmd_spawn('dmenu_run')
 
 # Drag floating layouts.
 mouse = [
