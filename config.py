@@ -247,9 +247,10 @@ focus_on_window_activation = "smart"
 wmname = "LG3D"
 
 cmd = [
+    "redshift &",#Blue screen eyes protector
     "nm-applet &",
-    "compton &",
-    "feh --bg-fill /home/antonio/Descargas/galaxy0.jpg"
+    "compton &",#Transparency
+    "feh --bg-fill /home/antonio/Descargas/galaxy0.jpg"#Load wallpaper
 ]
 
 for x in cmd:
